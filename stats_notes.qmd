@@ -177,19 +177,22 @@ This quantity is defined as the conditional probability that $Y$ belongs to a cl
 
 $$Pr(Y=1|X=x_0) > 0.5$$ and class 2 otherwise.
 
-## Running Code
+Bayes classifier produces the lowest possible test error rate and it is called the Bayes Error Rate. it is given by:
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+$$
+1 - E{\Large(}\max_j Pr(Y = j|X)\Large)
+$$
 
-```{r}
-1 + 1
-```
+Where the second part of the equation is defined as the expected probabilities of all values of X belonging to their assigned classes.
 
-You can add options to executable code like this
+### K Nearest Neighbours
 
-```{r}
-#| echo: false
-2 * 2
-```
+The preference would be to predict qualitative responses using Bayes Classifier however this is not possible with real data because the conditional distribution of $Y$ given $X$ is unknown which makes computing the Bayes classifier impossible. Many methods attempt to estimate this conditional distribution and then classify a given observation to the class with the highest estimated probability.
 
-The `echo: false` option disables the printing of code (only output is displayed).
+One such method is the K-Nearest Neighbours (KNN) Classifier and it works as follows. For a positive integer $K$ and a test observation $x_0$, the KNN classifier identifies the $K$ observations closest to the test observation $x_0$ given as $N_0$. It then estimates the probability of class $j$ as the fraction of points in $N_0$ whose response values are equal to $j$. KNN applies Bayes rule and classifies $x_0$ to the class with the highest probability.
+
+The choice of K has a drastic effect on the KNN classifier obtained such that the lower the value of K, the more flexible the decision boundary becomes. For example, selecting K = 1 for a dataset with many observations will generate an overly flexible decision boundary which finds patterns that don't conform to the Bayes decision boundary. This corresponds to a classifier with low bias and high variance. As K increases, the decision boundary becomes less flexible and closer to a linear one. This corresponds to a classifier with low variance and high bias.
+
+In general, as we use a more flexible classifier (K getting smaller), the training error rate declines but the test error rate may be quite high.
+
+In both regression and classification settings, choosing an appropriate level of flexibility is critical to the success of any statistical learning method. the bias-variance trade-off, and the resulting U-shape in the test error can make this a challenging task.
