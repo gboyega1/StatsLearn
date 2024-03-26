@@ -1,0 +1,195 @@
+---
+title: "Learning Statistics"
+author: "Adegboyega Ajenifuja"
+format: html
+editor: visual
+---
+
+# Statistical Learning
+
+## Introduction
+
+Imagine being hired by a company as a consultant to find a way to improve sales numbers of a product having being given a dataset about sales and advertising budgets. If its possible to establish a relationship between advertising and sales, and understand those relationships, then the company can be asked to adjust advertising budgets in line with those relationships to improve sales. The ultimate goal would be to build a model that accurately predicts sales based on advertising budgets.
+
+In such a modelling instance, Advertising budgets would be denoted as input variables, dependent variables, or predictors, and Sales would be the output, dependent or response variable.
+
+Mathematically, the Sales variable can be denoted as ***Y*** while the Advertising budget variables can be denoted by ***X~1~, X~2~, ..., X~n~***. Where ***n*** represents the number of Advertising budget variables being used as predictors.
+
+This relationship can be written in the following general form
+
+$$Y = f(x) + \epsilon$$
+
+***f*** is a fixed but unknown function of the Advertising budget variables and 𝛜 is a random error term which is independent of ***X*** and has a mean of 0.
+
+Statistical learning can be described as a set of tools that are used to estimate the relationship between the input and output variables. This relationship is denoted with ***f*** described above.
+
+## Why estimate *f* ?
+
+We estimate *f* for Prediction and Inference purposes.
+
+### Prediction
+
+***X*** variables are often available but ***Y*** is not, and since the error term averages to 0, we can predict ***Y*** using the formula:
+
+$$
+\hat{Y} = \hat{f}(X)
+$$
+
+where $\hat{f}$ represents the estimate for ***f*** and $\hat{Y}$ represents the prediction for ***Y***. The accuracy of $\hat{Y}$ as an estimated version of ***Y*** depends on two quantities known as the ***reducible*** and ***irreducible*** error.
+
+The fact that $\hat{f}$ is an estimate of ***f*** yields some error as a result of this inaccuracy. This error is however ***reducible*** because we can use the most appropriate statistical techniques to estimate ***f*** thus improving the accuracy of $\hat{f}$.
+
+If indeed we were able to completely remove the error associated with estimating ***f*** using $\hat{f}$ such that we ended up with the equation $\hat{Y} = f(X)$; our prediction would still have some error because $Y$ is a function of $\epsilon$ which cannot be predicted using ***X***. This variability in $\epsilon$ also impacts accuracy of our predictions and it is known as the ***irreducible*** error.
+
+### 
+
+Inference
+
+In such scenarios, we wish to estimate ***f*** but not for prediction purposes but rather to understand the relationship between ***Y*** and ***X***, specifically, how ***Y*** changes as a function of ***X***. Some of the questions that we may be interesting in answering are as follows:
+
+-   Which predictors are most important when it comes to predicting ***X***.
+
+-   What is the relationship between the response ***Y*** and each predictor ***X***. Positive, Negative or other.
+
+-   Can this relationship be accurately represented with a linear equation or is it more complex?
+
+### How do we estimate *f*?
+
+Assuming that we have observed a set of observations which we refer to as training data, we use this training data to teach our statistical methods to estimate the unknown function ***f***.
+
+In essence, we want to find a function $\hat{f}$ such that:
+
+$$
+Y \approx \hat{f}(X)
+$$
+
+This can be done in two different ways
+
+### Parametric
+
+1.  We begin by making an assumption about the functional form of ***f***. For example, we could assume that it is linear and looks like:
+
+$$
+f(X) = \beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_pX_p
+$$
+
+What this does is save us the problem of having to estimate an arbitrary p-dimensional function ***f(X)***. All we have to do is estimate the p+1 coefficients of the given equation in the example above.
+
+2.  Following the selection of a model, we need a statistical method that uses the training data to train or fit the selected model. For the example model above, we need to estimate the parameters $\beta_0, \beta_1, \beta_2, ..., \beta_p$ such that
+
+$$
+Y \approx \beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \beta_pXp
+$$
+
+This model based approach called parametric reduces the problem of estimating ***f*** down to one of estimating a set of parameters. The disadvantage of this approach is that the model we choose may be far from the true unknown form of the function ***f***. If the model is too far from the true form of ***f***, then our estimate will be poor.
+
+We can however try to address this by choosing flexible models that can fit many different possible functional forms of ***f***. This however requires fitting a greater number of parameters and in the case of extremely complex models, can lead to a phenomenon known as overfitting which implies that they follow the errors, or noise too closely.
+
+### Non-Parametric
+
+These methods do not make any assumptions about the functional form of ***f***. They rather seek to arrive at an estimate of ***f*** that's as close to the data points as possible without being too ***rough*** or ***wiggly***. This is one of their advantages over parametric approaches: as they have the potential to accurately fit a wide range of possible shapes for ***f***. They do have a disadvantage. Since they do not reduce the problem of estimating ***f*** to one of estimating a few parameters, this implies that a very large number of observations is often needed to obtain an accurate estimate of ***f***.
+
+### Prediction Accuracy and Model Interpretability Trade-Off
+
+As the flexibility of a model increases, its interpretability reduces but an increase in flexibility also implies that the fitted functional form of ***f*** is much closer to the true form of ***f***. Conversely, less flexible (restrictive) methods are more interpretable meaning that if we are modelling for the sake of inference, then these types of models may be more advantageous. However, their fitted functional representation of ***f*** may be further from the true functional form of ***f***.
+
+### Supervised vs Unsupervised Learning
+
+Supervised learning methods are those that involve predictor variable(s) and a response variable where the aim is to predict the outcome or value of the response variable using the predictor variable(s).
+
+In contrast, unsupervised learning methods are those that involve a set of variables which we cannot refer to as predictor variables because there is no response variable to predict. The aim here is often try to understand the relationships between variables or observations.
+
+### Regression vs Classification Problems
+
+Variables are either quantitative (numeric) or qualitative (categorical). Examples of quantitative variables are age, weight, distance. Examples of qaulitative variables are gender, product type. Problems with a quantitative response are often referred to a regression problems while problems with qualitative responses are referred to a classification problems.
+
+### Assessing Model Accuracy
+
+The reason its necessary to introduce many statistical learning approaches rather than having one best method is because on a particular dataset, one method may work best but another method may work better on a similar but different dataset.
+
+### Measuring the Quality of Fit
+
+This involves measuring the performance of a statistical learning method. We measure how well its predictions match the observed data. In regression, this is done using the Mean Squared Error (MSE) which is given by the following formula:
+
+$$MSE = \frac{1}{n}\sum_{i=1}(y_i - \hat{f}(x_i))^2 $$ It can be defined as the average of the squared differences between the observed responses and their fitted values. As a result, we can expect the MSE to be small if the fitted responses are very close to the actual responses but will be large if for some fitted responses, their values are very far from the actual responses.
+
+The MSE described above is referred to as the ***Training MSE*** which we honestly should not care about because we intend to apply our model/statistical learning technique to the test data or other unobserved data. A good example of this is building a model to predict stock prices. We could check its accuracy using the data it was trained on such as last week's prices but this would be of no practical use. Rather, we would want to test its capability of predicting next week's, month's or year's prices.
+
+Consequently, we would want to choose the method that gives the lowest ***Test MSE***. We would compute
+
+$$Ave(y_0 - \hat{f}(x_0))^2$$ such that $y_0$ and $x_0$ are the fitted unobserved values from the test dataset. We then select the statistical method for which this value is as small as possible.
+
+We need to consider how it is possible to select a method that minimizes the ***Test MSE***. We already know that increased flexibility in a model leads to a better fit of the training data and consequently, a reduced ***Training MSE***. This may not necessarily apply to the ***Test MSE*** such that rather than decrease, it increases. Such a scenario is known as ***Overfitting***. When we overfit the training data, the test MSE will be very large because those patterns that exist in the training data simply do not exist in the test data.
+
+Overfitting by a flexible model is a scenario where a less flexible model yields a ***test MSE*** smaller than that of the more flexible model.
+
+The above describes overfitting where the true functional form of ***f*** is non-linear. Where it is however linear, the dynamics are slightly different. As the flexibility of the model increases, the ***Training MSE*** also increases and so does the ***Test MSE***. As the flexibility of the model decreases, so does the ***Training MSE*** as does the ***Test MSE***.
+
+### Bias-Variance Trade-Off
+
+The U-shaped curve depicting the range of ***Test MSE*** values between more and less flexible statistical methods are as a result of the bias and variance associated with the functional form of ***f***. The ***Test MSE*** can be decomposed into 3 quantities:
+
+-   The variance of ***f***
+
+-   The squared bias of ***f***
+
+-   The variance of the irreducible error
+
+To minimize the test error, we need to select a statistical method that simultaneously achieves low variance and low bias.
+
+Variance of a statistical learning method refers to the amount by which $\hat{f}$ would change if it were estimated using a different training dataset. This is expected to be the case for different training datasets because the data is used to fit ***f***. We however prefer this variance to be as small as possible between between datasets because if a method has high variance then any small change in the training data results in large changes to ***f***. In general, more flexible statistical methods have higher variance.
+
+Bias is the error introduced by approximating a real life problem which may be very complicated by a much simpler model. An example is trying to estimate ***f*** on non-linear data using linear regression. In general, more flexible methods result in less bias. Also, as a general rule, as we use more flexible methods, the variance increases but the bias reduces.
+
+The relative rate of change of bias and variance determines whether the ***Test MSE*** increases or decreases.
+
+As we increase the flexibility of the statistical method(s), this leads to an increase in variance but a reduction in bias. However the rate of reduction in bias is much faster than the rate of increase in the variance. As a result of this, the ***Test MSE*** reduces. This is however not perpetual as there comes a point where increasing the flexibility of the statistical method no longer has a marked impact on the bias. It is at this point that the variance starts to increase much quicker than the bias can reduce and the consequence of this is that the ***Test MSE*** starts to increase.
+
+This relationship between ***bias***, ***variance***, and ***Test MSE*** is what is known as the ***bias-variance trade-off***.
+
+The key is to find a method that simultaneously gives low bias and low variance because it is possible to have a method with high variance and low bias by fitting a curve that passes through every single training observation or a method with low variance and high bias by fitting a straight line where the true form of ***f*** is non-linear.
+
+### The Classification Setting
+
+The most common approach for quantifying the estimate of $\hat{f}$ is the ***training error rate*** which is the proportion of mistakes made when the statistical method is applied to the training data It is given as:
+
+$$
+\frac{1}{n}\sum_{i=1} I(y_i \neq \hat{y}_i)
+$$
+
+It is known as the ***training error rate*** because it is computed using the training data which was used to train the classifier. Like with regression, we aren't interested in how the model performs on training data but rather how it performs on test data. We thus have the test error rate which is given by:
+
+$$
+Ave(I(y_0 \neq \hat{y_0}))
+$$
+
+A good classifier is one for which the test error rate is smallest.
+
+### The Bayes Classifier
+
+We would like to assign a test observation with predictor value $x_0$ to a class $j$ for which:
+
+$$
+Pr(Y = j | X = x_0)
+$$
+
+This quantity is defined as the conditional probability that $Y$ belongs to a class $j$ given that the given value of a predictor $X$ is $x_0$. To elucidate, in a two-class problem where there are only two response values, say class 1 and class 2, the Bayes Classifier will predict class 1 if:
+
+$$Pr(Y=1|X=x_0) > 0.5$$ and class 2 otherwise.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
